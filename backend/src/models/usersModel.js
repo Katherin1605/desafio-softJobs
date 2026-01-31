@@ -10,6 +10,7 @@ export const createUserModel = async ({email, password, rol, lenguage}) => {
         text: 'INSERT INTO usuarios (email, password, rol, lenguage) VALUES ($1, $2, $3, $4) RETURNING email, rol, lenguage',
         values: [email, hashedPassword, rol, lenguage]
     }
+    console.log(`🗄️  Query: ${sqlQuery.text}`)
     const response = await pool.query(sqlQuery)
     return response.rows[0]
 }
@@ -21,6 +22,7 @@ export const findUserModel = async (email) => {
         text: 'SELECT * FROM usuarios WHERE email = $1',
         values: [email]
     }
+    console.log(`🗄️  Query: ${sqlQuery.text}`)
     const response = await pool.query(sqlQuery)
     return response.rows[0]
 }

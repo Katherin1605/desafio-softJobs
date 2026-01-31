@@ -12,6 +12,12 @@ const app = express();
 app.use(cors());
 app.use(express.json())
 
+// Middelware de consultas
+app.use((req, res, next) => {
+    console.log(`📥 ${req.method} ${req.url} - ${new Date().toLocaleString()}`)
+    next()
+})
+
 // Routes
 
 app.use(userRoutes)
